@@ -1,0 +1,3 @@
+//object StartApp extends InitializableConsumer {
+//
+//}
