@@ -1,14 +1,17 @@
-import zio.{Fiber, Promise, Task, UIO, ZIO}
+package initconsumer
+
+import initconsumer.messageProsessor.MessageProsessor
 import zio.kafka.consumer.{CommittableRecord, Consumer, Subscription}
 import zio.kafka.serde.{Deserializer, Serde}
 import zio.stream.{ZSink, ZStream}
+import zio.{Fiber, Promise, Task, UIO, ZIO}
 
 import scala.util.{Failure, Success, Try}
 
 abstract class InitializableConsumer[M](
     consumer: Consumer,
     topic: String,
-    process: (M, Promise[Nothing, Unit]) => Task[Unit],
+    process: MessageProsessor[M],
     streamName: String,
     deserializer: Deserializer[Any, Try[M]]
 ) {
@@ -21,7 +24,7 @@ abstract class InitializableConsumer[M](
           handleMessage(record)
         }
         .collect { case Some(message) =>
-          process(message, initMarker)
+          process.handle(message, initMarker)
         }
         .run(ZSink.drain)
         .fork

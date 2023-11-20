@@ -1,4 +1,4 @@
-package config
+package initconsumer.config
 
 trait KafkaConsumerConfig {
   def topic: String

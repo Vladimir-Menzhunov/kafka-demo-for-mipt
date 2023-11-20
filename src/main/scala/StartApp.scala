@@ -1,3 +1,3 @@
-//object StartApp extends InitializableConsumer {
+//object StartApp extends initconsumer.InitializableConsumer {
 //
 //}

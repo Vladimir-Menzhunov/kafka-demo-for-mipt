@@ -1,4 +1,5 @@
 import Dependencies._
+import sbt.Project.projectToRef
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
@@ -63,7 +64,7 @@ lazy val twitter = (project in file("services/twitter"))
   .dependsOn(commonKafka)
   .aggregate(commonKafka)
 
-lazy val commonKafka = (project in file("services/modules/kafka"))
+lazy val commonKafka = (project in file("services/kafka"))
   .settings(
     name := "project-kafka",
     libraryDependencies ++= Kafka.dependencies
