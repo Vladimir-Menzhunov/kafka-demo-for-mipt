@@ -1,6 +1,6 @@
 package producer
 
-import domain.domain.{Answer, topicAnswer}
+import domain.Domain.{Answer, topicAnswer}
 import initproducer.InitializableProducerImpl
 import initproducer.helper.Helper.createProducer
 import io.circe.syntax.EncoderOps

@@ -1,6 +1,6 @@
 package initconsumer
 
-import initconsumer.helper.domain.Event
+import initconsumer.helper.Domain.Event
 import zio._
 import zio.kafka.consumer.{CommittableRecord, Consumer, Subscription}
 import zio.kafka.serde.{Deserializer, Serde}

@@ -2,7 +2,7 @@ package initproducer
 
 import zio.kafka.producer.Producer
 import zio.kafka.serde.{Serde, Serializer}
-import zio.{RIO, Task, ZIO}
+import zio.{RIO, ZIO}
 
 abstract class InitializableProducerImpl[M, R](
     producer: Producer,

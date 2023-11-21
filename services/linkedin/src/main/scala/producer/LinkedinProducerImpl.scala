@@ -1,12 +1,12 @@
 package producer
 
-import domain.domain.{Answer, topicAnswer}
+import domain.Domain.{Answer, topicAnswer}
 import initproducer.InitializableProducerImpl
 import initproducer.helper.Helper.createProducer
 import io.circe.syntax.EncoderOps
-import zio.{Scope, ZLayer}
 import zio.kafka.producer.Producer
 import zio.kafka.serde.{Serde, Serializer}
+import zio.{Scope, ZLayer}
 
 class LinkedinProducerImpl(
     producer: Producer,

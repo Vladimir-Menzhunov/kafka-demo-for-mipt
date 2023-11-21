@@ -2,7 +2,7 @@ package tinkoffapp
 
 import consumer.messageProsessor.MessageProcessorImpl
 import consumer.{TinkoffConsumer, TinkoffConsumerImpl}
-import domain.domain.{port, serviceName}
+import domain.Domain.serviceName
 import producer.TinkoffProducerImpl
 import tinkoffapp.api.HttpRoutes
 import zio.http.Server
@@ -31,6 +31,6 @@ object TinkoffApp extends ZIOAppDefault {
   private val serverConfigLive =
     zio.http.ServerConfig.live {
       http.ServerConfig.default
-        .binding("localhost", port)
+        .binding("localhost", 9003)
     }
 }

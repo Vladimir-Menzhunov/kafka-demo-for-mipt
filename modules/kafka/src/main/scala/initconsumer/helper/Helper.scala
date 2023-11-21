@@ -1,7 +1,7 @@
 package initconsumer.helper
 
-import zio.{Scope, ZIO}
 import zio.kafka.consumer.{Consumer, ConsumerSettings}
+import zio.{Scope, ZIO}
 
 object Helper {
   def createConsumer(groupId: String): ZIO[Scope, Throwable, Consumer] =

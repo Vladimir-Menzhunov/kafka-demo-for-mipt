@@ -1,6 +1,6 @@
 package pasha
 
-import domain.Domain.{port, serviceName}
+import domain.Domain.serviceName
 import manager.{ManagerConsumer, ManagerConsumerImpl}
 import pasha.api.HttpRoutes
 import state.StateServiceImpl
@@ -8,6 +8,7 @@ import zio.http.Server
 import zio.{Scope, ZIO, ZIOAppArgs, ZIOAppDefault, http}
 
 object PashaApp extends ZIOAppDefault {
+
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = {
     for {
       _ <- ZIO.logInfo(s"Start $serviceName service")
@@ -30,6 +31,6 @@ object PashaApp extends ZIOAppDefault {
   private val serverConfigLive =
     zio.http.ServerConfig.live {
       http.ServerConfig.default
-        .binding("localhost", port)
+        .binding("localhost", 9005)
     }
 }

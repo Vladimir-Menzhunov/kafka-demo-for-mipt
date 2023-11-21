@@ -1,6 +1,6 @@
 package tinkoffapp.api
 
-import domain.domain.serviceName
+import domain.Domain.serviceName
 import zio.ZIO
 import zio.http._
 import zio.http.model.Method

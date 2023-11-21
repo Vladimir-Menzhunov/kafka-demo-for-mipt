@@ -2,7 +2,7 @@ package linkedinapp
 
 import consumer.messageProsessor.MessageProcessorImpl
 import consumer.{LinkedinConsumer, LinkedinConsumerImpl}
-import domain.domain.{port, serviceName}
+import domain.Domain.serviceName
 import linkedinapp.api.HttpRoutes
 import producer.LinkedinProducerImpl
 import zio.http.Server
@@ -31,6 +31,6 @@ object LinkedinApp extends ZIOAppDefault {
   private val serverConfigLive =
     zio.http.ServerConfig.live {
       http.ServerConfig.default
-        .binding("localhost", port)
+        .binding("localhost", 9002)
     }
 }

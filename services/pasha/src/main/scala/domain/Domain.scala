@@ -6,7 +6,6 @@ object Domain {
   val topicAnswer = "topic.answer"
   val topicResume = "topic.resume"
   val serviceName = "pasha"
-  val port = 9005
 
   @JsonCodec
   case class Answer(isPositive: Boolean, message: String, company: String)

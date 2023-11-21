@@ -1,5 +1,4 @@
 import Dependencies._
-import sbt.Project.projectToRef
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
 

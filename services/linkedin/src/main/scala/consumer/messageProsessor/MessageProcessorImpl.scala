@@ -1,9 +1,9 @@
 package consumer.messageProsessor
 
-import domain.domain.{Answer, Resume, serviceName}
-import initconsumer.helper.domain.Event
+import domain.Domain.{Answer, Resume, serviceName}
+import initconsumer.helper.Domain.Event
 import producer.LinkedinProducer
-import zio.{Promise, UIO, ULayer, URIO, ZIO, ZLayer}
+import zio.{UIO, ULayer, ZIO, ZLayer}
 
 class MessageProcessorImpl(
     companyName: String

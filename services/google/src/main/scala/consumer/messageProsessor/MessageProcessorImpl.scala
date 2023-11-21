@@ -1,7 +1,7 @@
 package consumer.messageProsessor
 
-import domain.domain.{Answer, Resume, serviceName}
-import initconsumer.helper.domain.Event
+import domain.Domain.{Answer, Resume, serviceName}
+import initconsumer.helper.Domain.Event
 import producer.GoogleProducer
 import zio.{UIO, ULayer, ZIO, ZLayer}
 

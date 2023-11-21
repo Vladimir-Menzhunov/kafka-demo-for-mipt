@@ -2,10 +2,10 @@ package domain
 
 import io.circe.generic.JsonCodec
 
-object domain {
+object Domain {
   val topicAnswer = "topic.answer"
   val topicResume = "topic.resume"
-  val serviceName = "google"
+  val serviceName = "linkedin"
 
   @JsonCodec
   case class Answer(isPositive: Boolean, message: String, company: String)

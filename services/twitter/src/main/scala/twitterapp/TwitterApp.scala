@@ -2,7 +2,7 @@ package twitterapp
 
 import consumer.messageProsessor.MessageProcessorImpl
 import consumer.{TwitterConsumer, TwitterConsumerImpl}
-import domain.domain.{port, serviceName}
+import domain.Domain.serviceName
 import producer.TwitterProducerImpl
 import twitterapp.api.HttpRoutes
 import zio.http.Server
@@ -31,6 +31,6 @@ object TwitterApp extends ZIOAppDefault {
   private val serverConfigLive =
     zio.http.ServerConfig.live {
       http.ServerConfig.default
-        .binding("localhost", port)
+        .binding("localhost", 9004)
     }
 }

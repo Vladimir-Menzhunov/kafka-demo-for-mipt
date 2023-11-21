@@ -1,13 +1,13 @@
 package manager
 import domain.Domain.{Answer, serviceName, topicAnswer}
 import initconsumer.InitializableConsumer
+import initconsumer.helper.Domain.Event
 import initconsumer.helper.Helper.createConsumer
-import initconsumer.helper.domain.Event
 import io.circe.parser.parse
 import state.StateService
 import zio.kafka.consumer.Consumer
 import zio.kafka.serde.{Deserializer, Serde}
-import zio.{RIO, Scope, ZIO, ZLayer}
+import zio.{RIO, Scope, ZLayer}
 
 import scala.util.Try
 

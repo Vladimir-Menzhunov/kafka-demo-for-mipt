@@ -2,7 +2,7 @@ package consumer
 
 import consumer.messageProsessor.MessageProcessor
 import producer.TinkoffProducer
-import zio.{Fiber, UIO, URIO, ZIO}
+import zio.{Fiber, URIO, ZIO}
 
 trait TinkoffConsumer {
   def run: URIO[MessageProcessor with TinkoffProducer, Fiber.Runtime[Throwable, Unit]]

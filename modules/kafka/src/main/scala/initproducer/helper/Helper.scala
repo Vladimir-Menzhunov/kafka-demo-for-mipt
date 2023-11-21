@@ -1,8 +1,7 @@
 package initproducer.helper
 
-import zio.{Scope, ZIO}
-import zio.kafka.consumer.{Consumer, ConsumerSettings}
 import zio.kafka.producer.{Producer, ProducerSettings}
+import zio.{Scope, ZIO}
 
 object Helper {
   def createProducer: ZIO[Scope, Throwable, Producer] =

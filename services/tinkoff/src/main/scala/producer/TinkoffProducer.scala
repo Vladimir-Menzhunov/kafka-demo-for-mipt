@@ -1,6 +1,6 @@
 package producer
 
-import domain.domain.Answer
+import domain.Domain.Answer
 import zio.{RIO, ZIO}
 
 trait TinkoffProducer {

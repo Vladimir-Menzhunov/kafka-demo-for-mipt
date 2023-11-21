@@ -1,9 +1,9 @@
 package consumer.messageProsessor
 
-import domain.domain.{Answer, Resume}
-import initconsumer.helper.domain.Event
+import domain.Domain.Resume
+import initconsumer.helper.Domain.Event
 import producer.TinkoffProducer
-import zio.{Promise, URIO, ZIO}
+import zio.{URIO, ZIO}
 
 trait MessageProcessor {
   def handle(

@@ -2,15 +2,15 @@ package consumer
 
 import consumer.GoogleConsumerImpl.ProcessMessageType
 import consumer.messageProsessor.MessageProcessor
-import domain.domain._
+import domain.Domain._
 import initconsumer.InitializableConsumer
+import initconsumer.helper.Domain.Event
 import initconsumer.helper.Helper.createConsumer
-import initconsumer.helper.domain.Event
 import io.circe.parser.parse
 import producer.GoogleProducer
 import zio.kafka.consumer.Consumer
 import zio.kafka.serde.{Deserializer, Serde}
-import zio.{Promise, RIO, Scope, ZLayer}
+import zio.{RIO, Scope, ZLayer}
 
 import scala.util.Try
 

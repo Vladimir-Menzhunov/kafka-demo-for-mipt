@@ -1,14 +1,12 @@
 package pasha.api
 
-import domain.Domain.{Answer, Resume, serviceName}
+import domain.Domain.{Resume, serviceName}
 import io.circe.parser
 import io.circe.syntax.EncoderOps
 import state.StateService
 import zio.ZIO
 import zio.http._
 import zio.http.model.Method
-
-import scala.collection.mutable
 
 object HttpRoutes {
 

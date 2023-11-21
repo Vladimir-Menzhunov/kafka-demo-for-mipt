@@ -2,7 +2,7 @@ package consumer
 
 import consumer.messageProsessor.MessageProcessor
 import producer.TwitterProducer
-import zio.{Fiber, UIO, URIO, ZIO}
+import zio.{Fiber, URIO, ZIO}
 
 trait TwitterConsumer {
   def run: URIO[MessageProcessor with TwitterProducer, Fiber.Runtime[Throwable, Unit]]

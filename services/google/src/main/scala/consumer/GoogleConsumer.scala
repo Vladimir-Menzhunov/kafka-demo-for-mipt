@@ -2,7 +2,7 @@ package consumer
 
 import consumer.messageProsessor.MessageProcessor
 import producer.GoogleProducer
-import zio.{Fiber, UIO, URIO, ZIO}
+import zio.{Fiber, URIO, ZIO}
 
 trait GoogleConsumer {
   def run: URIO[MessageProcessor with GoogleProducer, Fiber.Runtime[Throwable, Unit]]

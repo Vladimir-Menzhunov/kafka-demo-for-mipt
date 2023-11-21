@@ -1,5 +1,5 @@
 package initconsumer.helper
 
-object domain {
+object Domain {
   case class Event[M](message: M, keyPartition: String)
 }
