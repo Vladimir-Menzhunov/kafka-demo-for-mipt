@@ -69,7 +69,7 @@ lazy val twitter = (project in file("services/twitter"))
   .dependsOn(commonKafka)
   .aggregate(commonKafka)
 
-lazy val commonKafka = (project in file("services/kafka"))
+lazy val commonKafka = (project in file("modules/kafka"))
   .settings(
     name := "project-kafka",
     libraryDependencies ++= Kafka.dependencies,
