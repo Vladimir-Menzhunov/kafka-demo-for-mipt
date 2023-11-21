@@ -1,9 +1,10 @@
 package initconsumer
 
+import initconsumer.helper.domain.Event
+import zio._
 import zio.kafka.consumer.{CommittableRecord, Consumer, Subscription}
 import zio.kafka.serde.{Deserializer, Serde}
 import zio.stream.{ZSink, ZStream}
-import zio._
 
 import scala.util.{Failure, Success, Try}
 
@@ -12,30 +13,28 @@ abstract class InitializableConsumer[M, R](
     topic: String,
     streamName: String,
     deserializer: Deserializer[Any, Try[M]],
-    process: (M, Promise[Nothing, Unit]) => RIO[R, Unit]
+    process: Event[M] => RIO[R, Unit]
 ) {
   def run: URIO[R, Fiber.Runtime[Throwable, Unit]] = {
     for {
       _ <- ZIO.logInfo("Starting consumer")
-      initMarker <- Promise.make[Nothing, Unit]
       fiber <- createStream
         .mapZIO { record =>
-          handleMessage(record)
+          handleMessage(record).map(r => (r, record.key))
         }
-        .collect { case Some(message) =>
-          message
+        .collect { case (Some(message), keyPartition) =>
+          Event(message, keyPartition)
         }
         .run(
           ZSink.foreachChunk { chunk =>
             chunk.foldZIO(()) { (_, message) =>
-              process(message, initMarker).catchAll { e =>
+              process(message).catchAll { e =>
                 ZIO.logError(s"Failed to process message ${e.getMessage}")
               }
             }
           }
         )
         .fork
-      _ <- initMarker.await
     } yield fiber
   }
 

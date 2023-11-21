@@ -1,6 +1,7 @@
 package consumer.messageProsessor
 
 import domain.domain.{Answer, Resume, serviceName}
+import initconsumer.helper.domain.Event
 import producer.LinkedinProducer
 import zio.{Promise, UIO, ULayer, URIO, ZIO, ZLayer}
 
@@ -9,19 +10,16 @@ class MessageProcessorImpl(
 ) extends MessageProcessor {
 
   override def handle(
-      r: Resume,
-      initMarker: Promise[Nothing, Unit]
+      r: Event[Resume]
   ): ZIO[LinkedinProducer, Nothing, Unit] =
     for {
-      isDone <- initMarker.isDone
-      _ <- initMarker.succeed(()).unless(isDone)
       isReadyScheduleInterview <- checkExperiences(r)
       answer <- createAnswer(isReadyScheduleInterview)
       _ <- LinkedinProducer.send(answer, r.keyPartition).orElse(ZIO.unit)
     } yield ()
 
-  private def checkExperiences(r: Resume): UIO[Boolean] = {
-    if (r.workExperienceYears > 3)
+  private def checkExperiences(event: Event[Resume]): UIO[Boolean] = {
+    if (event.message.workExperienceYears > 3)
       ZIO.succeed(true)
     else
       ZIO.succeed(false)
@@ -40,5 +38,6 @@ class MessageProcessorImpl(
 }
 
 object MessageProcessorImpl {
-  val live: ULayer[MessageProcessor] = ZLayer.succeed(new MessageProcessorImpl(serviceName))
+  val live: ULayer[MessageProcessor] =
+    ZLayer.succeed(new MessageProcessorImpl(serviceName))
 }

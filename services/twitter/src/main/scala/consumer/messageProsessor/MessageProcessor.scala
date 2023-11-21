@@ -1,20 +1,19 @@
 package consumer.messageProsessor
 
 import domain.domain.{Answer, Resume}
+import initconsumer.helper.domain.Event
 import producer.TwitterProducer
 import zio.{Promise, URIO, ZIO}
 
 trait MessageProcessor {
   def handle(
-      r: Resume,
-      initMarker: Promise[Nothing, Unit]
+      event: Event[Resume]
   ): URIO[TwitterProducer, Unit]
 }
 
 object MessageProcessor {
   def handle(
-      r: Resume,
-      initMarker: Promise[Nothing, Unit]
+      event: Event[Resume]
   ): URIO[MessageProcessor with TwitterProducer, Unit] =
-    ZIO.serviceWithZIO[MessageProcessor](_.handle(r, initMarker))
+    ZIO.serviceWithZIO[MessageProcessor](_.handle(event))
 }

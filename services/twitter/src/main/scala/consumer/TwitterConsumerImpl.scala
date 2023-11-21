@@ -5,6 +5,7 @@ import consumer.messageProsessor.MessageProcessor
 import domain.domain._
 import initconsumer.InitializableConsumer
 import initconsumer.helper.Helper.createConsumer
+import initconsumer.helper.domain.Event
 import io.circe.parser.parse
 import producer.TwitterProducer
 import zio.kafka.consumer.Consumer
@@ -44,8 +45,5 @@ object TwitterConsumerImpl {
     )
   }
 
-  type ProcessMessageType = (
-      Resume,
-      Promise[Nothing, Unit]
-  ) => RIO[MessageProcessor with TwitterProducer, Unit]
+  type ProcessMessageType = Event[Resume] => RIO[MessageProcessor with TwitterProducer, Unit]
 }

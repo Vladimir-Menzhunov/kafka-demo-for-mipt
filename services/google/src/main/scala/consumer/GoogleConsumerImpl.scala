@@ -5,6 +5,7 @@ import consumer.messageProsessor.MessageProcessor
 import domain.domain._
 import initconsumer.InitializableConsumer
 import initconsumer.helper.Helper.createConsumer
+import initconsumer.helper.domain.Event
 import io.circe.parser.parse
 import producer.GoogleProducer
 import zio.kafka.consumer.Consumer
@@ -44,8 +45,5 @@ object GoogleConsumerImpl {
     )
   }
 
-  type ProcessMessageType = (
-      Resume,
-      Promise[Nothing, Unit]
-  ) => RIO[MessageProcessor with GoogleProducer, Unit]
+  type ProcessMessageType = Event[Resume] => RIO[MessageProcessor with GoogleProducer, Unit]
 }

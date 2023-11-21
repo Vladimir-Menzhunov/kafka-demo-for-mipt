@@ -1,6 +1,7 @@
 package consumer.messageProsessor
 
 import domain.domain.{Answer, Resume, serviceName}
+import initconsumer.helper.domain.Event
 import producer.TinkoffProducer
 import zio.{Promise, UIO, ULayer, URIO, ZIO, ZLayer}
 
@@ -9,19 +10,16 @@ class MessageProcessorImpl(
 ) extends MessageProcessor {
 
   override def handle(
-      r: Resume,
-      initMarker: Promise[Nothing, Unit]
+      event: Event[Resume]
   ): ZIO[TinkoffProducer, Nothing, Unit] =
     for {
-      isDone <- initMarker.isDone
-      _ <- initMarker.succeed(()).unless(isDone)
-      isReadyScheduleInterview <- checkExperiences(r)
+      isReadyScheduleInterview <- checkExperiences(event)
       answer <- createAnswer(isReadyScheduleInterview)
-      _ <- TinkoffProducer.send(answer, r.keyPartition).orElse(ZIO.unit)
+      _ <- TinkoffProducer.send(answer, event.keyPartition).orElse(ZIO.unit)
     } yield ()
 
-  private def checkExperiences(r: Resume): UIO[Boolean] = {
-    if (r.workExperienceYears > 3)
+  private def checkExperiences(event: Event[Resume]): UIO[Boolean] = {
+    if (event.message.workExperienceYears > 3)
       ZIO.succeed(true)
     else
       ZIO.succeed(false)
