@@ -6,6 +6,8 @@ object V {
   val zioKafka = "2.6.0"
 
   val pureconfig = "0.17.4"
+
+  val circe = "0.14.5"
 }
 
 object Libs {
@@ -18,5 +20,11 @@ object Libs {
 
   val pureconfig: List[ModuleID] = List(
     "com.github.pureconfig" %% "pureconfig" % V.pureconfig
+  )
+
+  val circe: List[ModuleID] = List(
+    "io.circe" %% "circe-parser" % V.circe,
+    "io.circe" %% "circe-core" % V.circe,
+    "io.circe" %% "circe-generic" % V.circe
   )
 }

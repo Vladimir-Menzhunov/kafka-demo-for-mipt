@@ -27,7 +27,8 @@ lazy val root = (project in file("."))
 lazy val pasha = (project in file("services/pasha"))
   .settings(
     name := "project-pasha",
-    libraryDependencies ++= Pasha.dependencies
+    libraryDependencies ++= Pasha.dependencies,
+    scalacOptions ++= Seq("-Ymacro-annotations"),
   )
   .dependsOn(commonKafka)
   .aggregate(commonKafka)
@@ -35,7 +36,8 @@ lazy val pasha = (project in file("services/pasha"))
 lazy val google = (project in file("services/google"))
   .settings(
     name := "project-google",
-    libraryDependencies ++= Google.dependencies
+    libraryDependencies ++= Google.dependencies,
+    scalacOptions ++= Seq("-Ymacro-annotations"),
   )
   .dependsOn(commonKafka)
   .aggregate(commonKafka)
@@ -43,7 +45,8 @@ lazy val google = (project in file("services/google"))
 lazy val linkedin = (project in file("services/linkedin"))
   .settings(
     name := "project-linkedin",
-    libraryDependencies ++= Linkedin.dependencies
+    libraryDependencies ++= Linkedin.dependencies,
+    scalacOptions ++= Seq("-Ymacro-annotations"),
   )
   .dependsOn(commonKafka)
   .aggregate(commonKafka)
@@ -51,7 +54,8 @@ lazy val linkedin = (project in file("services/linkedin"))
 lazy val tinkoff = (project in file("services/tinkoff"))
   .settings(
     name := "project-tinkoff",
-    libraryDependencies ++= Tinkoff.dependencies
+    libraryDependencies ++= Tinkoff.dependencies,
+    scalacOptions ++= Seq("-Ymacro-annotations"),
   )
   .dependsOn(commonKafka)
   .aggregate(commonKafka)
@@ -59,7 +63,8 @@ lazy val tinkoff = (project in file("services/tinkoff"))
 lazy val twitter = (project in file("services/twitter"))
   .settings(
     name := "project-twitter",
-    libraryDependencies ++= Twitter.dependencies
+    libraryDependencies ++= Twitter.dependencies,
+    scalacOptions ++= Seq("-Ymacro-annotations"),
   )
   .dependsOn(commonKafka)
   .aggregate(commonKafka)
@@ -67,5 +72,6 @@ lazy val twitter = (project in file("services/twitter"))
 lazy val commonKafka = (project in file("services/kafka"))
   .settings(
     name := "project-kafka",
-    libraryDependencies ++= Kafka.dependencies
+    libraryDependencies ++= Kafka.dependencies,
+    scalacOptions ++= Seq("-Ymacro-annotations"),
   )

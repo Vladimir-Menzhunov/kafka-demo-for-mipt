@@ -1,12 +1,14 @@
 package consumer
 
-import zio.{Fiber, UIO, ZIO}
+import consumer.messageProsessor.MessageProcessor
+import producer.GoogleProducer
+import zio.{Fiber, UIO, URIO, ZIO}
 
 trait GoogleConsumer {
-  def run: UIO[Fiber.Runtime[Throwable, Unit]]
+  def run: URIO[MessageProcessor with GoogleProducer, Fiber.Runtime[Throwable, Unit]]
 }
 
 object GoogleConsumer {
-  def run: ZIO[GoogleConsumer, Nothing, Fiber.Runtime[Throwable, Unit]] =
+  def run: URIO[MessageProcessor with GoogleProducer with GoogleConsumer, Fiber.Runtime[Throwable, Unit]] =
     ZIO.serviceWithZIO[GoogleConsumer](_.run)
 }
