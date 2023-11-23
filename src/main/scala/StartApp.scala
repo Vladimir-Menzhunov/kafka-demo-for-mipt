@@ -1,8 +1,8 @@
-import googleapp.GoogleApp
-import linkedinapp.LinkedinApp
-import pasha.PashaApp
-import tinkoffapp.TinkoffApp
-import twitterapp.TwitterApp
+import google.googleapp.GoogleApp
+import linkedin.linkedinapp.LinkedinApp
+import pashaservice.pasha.PashaApp
+import tinkoff.tinkoffapp.TinkoffApp
+import twitter.twitterapp.TwitterApp
 import zio.{Scope, ZIO, ZIOAppArgs, ZIOAppDefault}
 
 object StartApp extends ZIOAppDefault {
